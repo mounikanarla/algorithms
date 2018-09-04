@@ -7,7 +7,7 @@ module.exports={
     anagram : function(string1,string2)
     {
         /*
-         * @description : conparing the strings using string length property
+         * @description : comparing the strings using string length property
          */
         if(string1.length!=string2.length)
         {
@@ -31,7 +31,11 @@ module.exports={
           return (string1,string2)
     },
 
-    
+    /*
+     * @description : printing the primenumbers with in the given range
+     * @function: primenumber function takes minimum and maximum numbers as input and gives
+     *            the primenumbers within that range
+     */
     primenumber : function(min,max)
     {
         var flag,count=0;
@@ -59,6 +63,18 @@ module.exports={
         
     },
 
+    getcurrenttime : function()
+   {
+    var date=new Date();
+    var n=date.getTime();
+    return n;
+   },
+   elapsedtime : function(start,stop)
+   {
+     elapsed =(stop-start);
+     return elapsed;
+   },
+
     binary : function(size)
     {
         var prompt=require('prompt-sync')();
@@ -66,29 +82,50 @@ module.exports={
         var a=0;
         for(var i=0;i<size;i++)
         {
-            arr[i]=prompt("enter the numbers");
+            arr[i]=prompt("enter the numbers: ");
         }
-        arr.sort();
-        console.log(arr);
-        var first=0,last=size-1;
-        var value=prompt("enter the element to search: ");
-        while(first<=last)
+        var a=/[a-zA-Z]/g;
+        var b=/[0-9]/g;
+        var c=/[!@#$%^&*()<>+-/"'?]/g;
+        var count=0;
+        for(var i=0;i<arr.length;i++)
         {
-            var mid=Math.floor((first+last)/2);
-            if(value==arr[mid])
+            if(arr[i].search(a)== -1 && arr[i].search(c)== -1)
             {
-               a=1;
-                break;
+                count=count+1;
+                console.log(count);
             }
-            else{
-                if(value>arr[mid])
-                {
-                    first=mid+1;
-                }
-                else{
-                    last=mid-1;
+        }
+        if(count==arr.length)
+        {
+           arr.sort(function(a,b){
+               return a-b;
+           });
+            console.log(arr);
+            var first=0,last=size-1;
+            var value=prompt("enter the element to search: ");
+             while(first<=last)
+            {
+             var mid=Math.floor((first+last)/2);
+              if(value==arr[mid])
+               {
+                    a=1;
+                    break;
+               }
+               else
+               {
+                    if(value>arr[mid])
+                    {
+                       first=mid+1;
+                    }
+                    else{
+                        last=mid-1;
+                    }
                 }
             }
+        } 
+        else{
+            console.log(" please enter number");
         }
         if(a==1)
         {
@@ -100,42 +137,261 @@ module.exports={
         }
     },
 
-             
-    bubble : function(arr)
+    binaryword : function(size)
     {
-        for(var j=0;j<arr.length-1;j++)
+        var prompt=require('prompt-sync')();
+        var arr=new Array(size);
+        var a=0;
+        for(var i=0;i<size;i++)
         {
-            for(var k=0;k<arr.length-1-j;k++)
+            arr[i]=prompt("enter the strings: ");
+        }
+        var char=/[a-zA-Z]/g;
+        var num=/[0-9]/g;
+        var symbol=/[!@#$%^&*()<>+-/"'?]/g;
+        var count=0;
+        for(var i=0;i<arr.length;i++)
+        {
+            if(arr[i].search(num)== -1 && arr[i].search(symbol)== -1)
             {
-                if(arr[k]>arr[k+1])
-                {
-                    var  temp=arr[k];
-                         arr[k]=arr[k+1];
-                         arr[k+1]=temp;
+                count=count+1;
+                console.log(count);
+            
+            }
+        }
+        if(count==arr.length)
+        {
+           arr.sort(function(char,num){
+               return char-num;
+           });
+            console.log(arr);
+            var first=0,last=size-1;
+            var value=prompt("enter the element to search: ");
+             while(first<=last)
+            {
+             var mid=Math.floor((first+last)/2);
+              if(value==arr[mid])
+               {
+                    a=1;
+                    break;
+               }
+               else
+               {
+                    if(value>arr[mid])
+                    {
+                       first=mid+1;
+                    }
+                    else{
+                        last=mid-1;
+                    }
                 }
             }
+        } 
+        else{
+            console.log(" please enter string");
         }
-        console.log("The sorted array is"+arr);
-    },
-
-    insertion : function(arr)
-    {
-        for(var j=1;j<arr.length;j++)
+        if(a==1)
         {
-            var key=arr[j];
-            var k=j-1;
-            while(k>-1 && arr[k]>key)
-            {
-                arr[k+1]=arr[k];
-                k--;
-            }
-            arr[k+1]=key;
+            console.log("element is found at index "+mid);
         }
-        
-        console.log("The sorted array is " +arr)
+        else
+        {
+            console.log("element not found");
+        }
+    },
+             
+    bubble : function(size)
+    {   var prompt=require('prompt-sync')();
+        var arr=new Array(size);
+        for(var i=0;i<size;i++)
+        {
+            arr[i]=prompt("enter the numbers");
+        }
+        var a=/[a-zA-Z]/g;
+        var b=/[0-9]/g;
+        var c=/[!@#$%^&*()<>+-/"'?]/g;
+        var count=0;
+        for(var i=0;i<arr.length;i++)
+        {
+            if(arr[i].search(a)== -1 && arr[i].search(c)== -1)
+            {
+                count=count+1;
+            }
+        }
+        if(count==arr.length)
+        {
+            console.log(arr);
+           for(var j=0;j<arr.length-1;j++)
+           {
+               for(var k=0;k<arr.length-1-j;k++)
+               {
+                    if(arr[k]>arr[k+1])
+                   {
+                       var  temp=arr[k];
+                         arr[k]=arr[k+1];
+                         arr[k+1]=temp;
+                    }
+                }
+           }
+         console.log("The sorted array is"+[arr]);
+        }
+        else
+        {
+         console.log("please enter numbers");
+        }
     },
 
-    calender : function(y,m,d)
+    bubbleword : function(size)
+    {   var prompt=require('prompt-sync')();
+        var arr=new Array(size);
+        for(var i=0;i<size;i++)
+        {
+            arr[i]=prompt("enter the strings");
+        }
+        var char=/[a-zA-Z]/g;
+        var num=/[0-9]/g;
+        var symbol=/[!@#$%^&*()<>+-/"'?]/g;
+        var count=0;
+        for(var i=0;i<arr.length;i++)
+        {
+            if(arr[i].search(num)== -1 && arr[i].search(symbol)== -1)
+            {
+                count=count+1;
+            }
+        }
+        if(count==arr.length)
+        {
+            console.log(arr);
+           for(var j=0;j<arr.length-1;j++)
+           {
+               for(var k=0;k<arr.length-1-j;k++)
+               {
+                    if(arr[k]>arr[k+1])
+                   {
+                       var  temp=arr[k];
+                         arr[k]=arr[k+1];
+                         arr[k+1]=temp;
+                    }
+                }
+           }
+         console.log("The sorted array is"+[arr]);
+        }
+        else
+        {
+         console.log("please enter string values");
+        }
+    },
+
+    insertionword : function(size)
+    {
+        var prompt=require('prompt-sync')();
+        var arr=new Array(size);
+        for(var i=0;i<size;i++)
+        {
+            arr[i]=prompt("enter the strings");
+        }
+        var char=/[a-zA-Z]/g;
+        var num=/[0-9]/g;
+        var symbol=/[!@#$%^&*()<>+-/"'?]/g;
+        var count=0;
+        for(var i=0;i<arr.length;i++)
+        {
+            if(arr[i].search(num)== -1 && arr[i].search(symbol)== -1)
+            {
+                count=count+1;
+            }
+        }
+        if(count==arr.length)
+        {
+            console.log(arr);
+            for(var j=1;j<arr.length;j++)
+            {
+              var key=arr[j];
+              var k=j-1;
+              while(k>-1 && arr[k]>key)
+              {
+                  arr[k+1]=arr[k];
+                  k--;
+            }
+              arr[k+1]=key;
+           }  
+        
+           console.log("The sorted array is " +arr)
+        }
+        else
+        {
+           console.log("please enter string values");
+        }
+    },
+
+    insertion : function(size)
+    {
+        var prompt=require('prompt-sync')();
+        var arr=new Array(size);
+        for(var i=0;i<size;i++)
+        {
+            arr[i]=prompt("enter the numbers: ");
+        }
+        var char=/[a-zA-Z]/g;
+        var num=/[0-9]/g;
+        var symbol=/[!@#$%^&*()<>+-/"'?]/g;
+        var count=0;
+        for(var i=0;i<arr.length;i++)
+        {
+            if(arr[i].search(char)== -1 && arr[i].search(symbol)== -1)
+            {
+                count=count+1;
+            }
+        }
+        if(count==arr.length)
+       {
+            for(var j=1;j<arr.length;j++)
+            {
+              var key=arr[j];
+              var k=j-1;
+              while(k>-1 && arr[k]>key)
+              {
+                  arr[k+1]=arr[k];
+                  k--;
+            }
+              arr[k+1]=key;
+           }  
+        
+           console.log("The sorted array is " +arr)
+        }
+        else
+        {
+           console.log("please enter numerical values");
+        }
+    },
+
+    numgame : function(low,high)
+    {
+        var prompt=require('prompt-sync')();
+        var m=parseInt(low)+parseInt(high);
+        mid=Math.floor(m/2);1
+        console.log("if the given num is less than "+mid+" press 1");
+        console.log("if the given number is greater than "+mid+" press 2");
+        console.log("if number is equal press zero: ")
+        var temp= prompt("enter the number: ");
+        if(temp == 0)
+        {
+            console.log("your number is: "+mid);
+        }
+        else if(temp == 1)
+        {
+            this.numgame(low,mid);
+        }
+        else if(temp == 2)
+        {
+            this.numgame(mid,high);
+        }
+        else{
+            console.log("Invalid option");
+        }
+    },
+
+     calender : function(y,m,d)
     {
         var m0,y0,d0,x;
         y0=y-Math.floor(14-m)/12;
@@ -220,9 +476,10 @@ module.exports={
 
          var  mid=(Math.floor(first+last)/2);
          console.log(mid);
-          if(searchword===arr[mid])
+          if(searchword==arr[mid])
           {
-              console.log("the search element is found at "+mid)
+              a=1;
+              console.log(a);
               break;
           }       
             else{
@@ -238,14 +495,16 @@ module.exports={
                 }
             }
         
-        }
-          if(a==1)
+       }
+          if(a==="1")
           {
               console.log("The search element is found at index "+mid);
           }
           else{
               console.log("the search element is not found");
-          }
+      
+              }
+                     
       
   },
 
@@ -312,9 +571,9 @@ module.exports={
       console.log("the minimum no of notes are: "+count);
     },
 
-    binary : function(decimal)
+    getbinary : function(decimal)
     {
-        var binary=[];
+        var binaryvalue=[];
         var reverse=[];
         var index=0;
         while(decimal>0)
@@ -325,14 +584,136 @@ module.exports={
         }
         for(var j=0;j<reverse.length;j++)
         {
-            binary[j]=reverse[reverse.length-1-j];
-            
+            binaryvalue[j]=reverse[reverse.length-1-j];
         }
-        return binary;
-    }
+        return binaryvalue;
+    },
 
+  mergesort : function(arr)
+  {
+     var arr1=[];
+     var arr2=[];
+     var mid=Math.floor(arr.length/2);
+     if(arr.length==1)
+     {
+         return arr;
+     }
+     for(var i=0;i<mid;i++)
+     {
+         arr1.push(arr[i]);
+     }
+     for(var j=mid;j<arr.length;j++)
+     {
+         arr2.push(arr[j]);
+     }
+     return this.merge(this.mergesort(arr1),this.mergesort(arr2));
+    },
 
+     merge : function(left,right) 
+     {
+   
+       var sorted = [];
+       var leftindex=0;
+       var rightindex=0;
+       while(sorted.length<(left.length + right.length))
+        {
+            if(leftindex== left.length) 
+            {
+                for(var i=rightindex;i<right.length;i++)
+                {
+                       sorted.push(right[i]);
+                       rightindex++;
+                }
+            }
+            else if(rightindex== right.length) 
+            {
+                for(var i=leftindex;i<left.length;i++)
+                {
+                   sorted.push(left[i]);
+                   leftindex++;
+                }
+            }
+            else if(left[leftindex]<right[rightindex]) 
+            {
+                 sorted.push(left[leftindex]);
+                   leftindex++;
+            }
+            else 
+            {
+                 sorted.push(right[rightindex]);
+                   rightindex++;    
+            }
+        }
+        return sorted;
+     },
+   
+     toBinary : function(dec)
+     {
+         var a=0;
+         var res=" ";
+         while(dec>0){
+             a=Math.floor(dec%2);
+             res=res+ "" +a;
+             dec=Math.floor(dec/2);
+         }
+         var resarray=(res.split('')).reverse().join('');
+         console.log("Binary value of the given decimal is: "+resarray);
+         return resarray;
+     },
+     Binary : function (bin)
+     {
+         var str=""+bin;
+         var arr=(str.split('')).reverse();
+         var dec=0;
+         for(var i=0;i<arr.length;i++)
+         {
+             dec=dec+parseInt(arr[i]*(Math.pow(2,i)));
+         }
+        /* console.log("decimal value of the given number is"+dec);*/
+         return dec;
+     },
+     nibble : function(bin)
+     {
+         var str = ""+bin;
+         var mid=0,str1="",res=[];
+         var flag=false;
+         var final="";
+         while(flag==false)
+         if(str.length==9)
+         {
+             mid=Math.floor(str.length/2);
+             /*console.log(mid +" mid value");*/
+             var str1=str.slice(0,mid);
+              var str2=str.slice(mid,str.length);
+              var res=(str2.trim())+str1;
+              flag=true;
+              console.log("new binary number is "+res);
+              return res;
+         }
+         else{
+             while(str.length<9)
+             {
+                 str='0'+str;
+             }
+            }
+       },
 
+       checkpow: function (n)
+       {
+           var pow=0;
+           while(n>1){
+               if(n%2==0)
+               {
+                   pow++;
+               }
+               else{
+                   return -1;
+               }
+               n=n/2;
+           }
+           return pow;
+       }
+    
 
 
 
