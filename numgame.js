@@ -5,13 +5,13 @@ var read=readline.createInterface({
     output:process.stdout
 });
 
-function  binary()
+function numgame()
 {
-    read.question("Enter the decimal value: ",function(decimal){
-
-           var value=utility.getbinary(decimal);
-            console.log(value.join(""));
+    read.question("Enter the low value: ",function(low){
+        read.question("Enter the high value: ",function(high){
+            utility.numgame(low,high);
             read.close();
+        })
     })
 }
-binary();
+numgame();
