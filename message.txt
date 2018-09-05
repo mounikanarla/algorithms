@@ -1,1 +1,1 @@
-javascript,language,programming,software
+javascript is using for both frontend and backend
