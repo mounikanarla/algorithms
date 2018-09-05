@@ -1,3 +1,14 @@
+var prompt=require('prompt-sync')();
+function setNumber(){
+    var num = parseInt(prompt("enter the strings"));
+    if(num > 0){
+        return num;
+    }else{
+        console.log("R-enter the number again")
+        return setNumber();
+    }
+}
+
 module.exports={
     /* 
      *  @description : Comparing the strings to check for anagram
@@ -20,15 +31,12 @@ module.exports={
           var str1=string1.toLowerCase('').split('').sort().join('');
           /*console.log(str1);*/
           var str2=string2.toLowerCase('').split('').sort().join('');
-          /*console.log(str2);*/
-          /*
-           * @description : comparing the strings after sorting to find anagram
-           */ 
+       // @description : comparing the strings after sorting to find anagram 
           if(str1==str2)
           {
               console.log( string1+" and "+string2+" are anagram to each other");
           }
-          return (string1,string2)
+        //   return (string1,string2)
     },
 
     /*
@@ -38,11 +46,16 @@ module.exports={
      */
     primenumber : function(min,max)
     {
+        /* declaring the variables flag to check the given number is prime or not ,
+         * count to count the numbers in the given range and primenumber array to store primenumbers
+         */
         var flag,count=0;
         var primenumbers= [];
-        for(var i=min+2;i<=max;i++)
+        // Initializing the loop to repeat upto given range
+        for(var i=min;i<=max;i++)
         {
             flag=1;
+            // Intializing the loop to check the primenumber condition
             for(var j=2;j<=i/2;j++)
             {
                 if(i%j==0)
@@ -50,7 +63,9 @@ module.exports={
                     flag=0;
                     break;
                 }
-            }    
+            }   
+            /* If flag value is changed to one then push the number in primenumber array 
+               and increase the count*/  
             if(flag==1)
             {
                 primenumbers.push(i);
@@ -62,51 +77,61 @@ module.exports={
         return primenumbers;
         
     },
-
+/* getcurrenttime function gives present system time and return to called function in main*/
     getcurrenttime : function()
    {
     var date=new Date();
     var n=date.getTime();
     return n;
    },
+   /*elapsed time gives difference between start time and stop time*/ 
    elapsedtime : function(start,stop)
    {
      elapsed =(stop-start);
      return elapsed;
    },
-
+/*binary function takes the array values and sorted it and search for the given element*/
     binary : function(size)
     {
-        var prompt=require('prompt-sync')();
+        /*returns an instance of prompt to read input from users*/
         var arr=new Array(size);
         var a=0;
+        /*Initilizing the loop to store the array values*/
         for(var i=0;i<size;i++)
         {
-            arr[i]=prompt("enter the numbers: ");
+            arr[i]= setNumber();
+            // /*var  temp=prompt("enter the numbers: ");*/
+            // arr[i]=prompt("enter the numbers: ");
         }
-        var a=/[a-zA-Z]/g;
+        /* variables that defines special characters using regex values*/
+        /*var a=/[a-zA-Z]/g;
         var b=/[0-9]/g;
         var c=/[!@#$%^&*()<>+-/"'?]/g;
         var count=0;
-        for(var i=0;i<arr.length;i++)
+        /*intializing the loop to take only number values*/ 
+        /*for(var i=0;i<arr.length;i++)
         {
             if(arr[i].search(a)== -1 && arr[i].search(c)== -1)
             {
                 count=count+1;
-                console.log(count);
             }
-        }
-        if(count==arr.length)
+        }*/
+        /* if count and array values are equal then the array is sorted*/
+       /* if(count==arr.length)
         {
            arr.sort(function(a,b){
                return a-b;
            });
-            console.log(arr);
+            console.log(arr);*/
+            /* defining first and lastindex values of array*/
             var first=0,last=size-1;
+            /*by using prompt we are taking search elements*/
             var value=prompt("enter the element to search: ");
+            /* while loop compares the first and last indexes */
              while(first<=last)
             {
-             var mid=Math.floor((first+last)/2);
+               mid=Math.floor((first+last)/2);
+               /*if the search element is euals to mid values of array it will takes indexvalue*/
               if(value==arr[mid])
                {
                     a=1;
@@ -114,6 +139,7 @@ module.exports={
                }
                else
                {
+                   /* search element is greater than the mid value it will adds mid+1 to first*/
                     if(value>arr[mid])
                     {
                        first=mid+1;
@@ -123,10 +149,11 @@ module.exports={
                     }
                 }
             }
-        } 
-        else{
+        //}
+        /* if the user enter differnt numbers then it will print else statement*/
+        /*else{
             console.log(" please enter number");
-        }
+        }*/
         if(a==1)
         {
             console.log("element is found at index "+mid);
@@ -137,80 +164,90 @@ module.exports={
         }
     },
 
+    /*binaryword function takes the array values and sorted it and search for the given word*/
     binaryword : function(size)
     {
+        /*returns an instance of prompt to read input from users*/
         var prompt=require('prompt-sync')();
         var arr=new Array(size);
         var a=0;
+        /*Initilizing the loop to store the array values*/
         for(var i=0;i<size;i++)
         {
             arr[i]=prompt("enter the strings: ");
         }
+        /* variables that defines special characters using regex values*/
         var char=/[a-zA-Z]/g;
         var num=/[0-9]/g;
         var symbol=/[!@#$%^&*()<>+-/"'?]/g;
         var count=0;
+        /*intializing the loop to take only string values*/
         for(var i=0;i<arr.length;i++)
         {
             if(arr[i].search(num)== -1 && arr[i].search(symbol)== -1)
             {
                 count=count+1;
-                console.log(count);
             
             }
         }
-        if(count==arr.length)
+         /* if count and array values are equal then the array is sorted*/
+        if(count===arr.length)
         {
            arr.sort(function(char,num){
                return char-num;
            });
             console.log(arr);
+            /* defining first and lastindex values of array*/
             var first=0,last=size-1;
             var value=prompt("enter the element to search: ");
              while(first<=last)
             {
-             var mid=Math.floor((first+last)/2);
+               mid=Math.floor((first+last)/2);
+                 /*if the search element is euals to mid values of array it will takes indexvalue*/
               if(value==arr[mid])
                {
-                    a=1;
-                    break;
+                    console.log(" The search element is found at index : "+mid);
+                    process.exit();
                }
-               else
-               {
-                    if(value>arr[mid])
+               /* search element is greater than the mid value it will adds mid+1 to first*/
+               else if(value>arr[mid])
                     {
                        first=mid+1;
                     }
-                    else{
+               /* search element is lesser than the mid value it will subtracts mid-1 from last*/     
+               else if(value<arr[mid])
+                    {
                         last=mid-1;
                     }
+                else
+                {
+                    console.log("The search element is not found");
+                    process.exit();
                 }
             }
         } 
-        else{
-            console.log(" please enter string");
-        }
-        if(a==1)
-        {
-            console.log("element is found at index "+mid);
-        }
+        /* if the user enter differnt input then it will print else statement*/
         else
         {
-            console.log("element not found");
+            console.log("Enter string values");
         }
     },
-             
+     /*bubble function takes the array values and sorted it by comparing with index values*/         
     bubble : function(size)
-    {   var prompt=require('prompt-sync')();
+    {  
+         /*returns an instance of prompt to read input from users*/
+        var prompt=require('prompt-sync')();
         var arr=new Array(size);
+         /*Initilizing the loop to store the array values*/
         for(var i=0;i<size;i++)
         {
-            arr[i]=prompt("enter the numbers");
         }
+         /* variables that defines special characters using regex values*/
         var a=/[a-zA-Z]/g;
         var b=/[0-9]/g;
         var c=/[!@#$%^&*()<>+-/"'?]/g;
         var count=0;
+         /*intializing the loop to take only number values*/
         for(var i=0;i<arr.length;i++)
         {
             if(arr[i].search(a)== -1 && arr[i].search(c)== -1)
@@ -218,40 +255,47 @@ module.exports={
                 count=count+1;
             }
         }
-        if(count==arr.length)
-        {
-            console.log(arr);
-           for(var j=0;j<arr.length-1;j++)
-           {
-               for(var k=0;k<arr.length-1-j;k++)
-               {
+         if(count==arr.length)
+         {
+             console.log(arr);
+             /* compare each and every value and if each index value is greater than the 
+                given value it will swap*/
+            for(var j=0;j<arr.length-1;j++)
+            {
+              for(var k=0;k<arr.length-1-j;k++)
+                 {
                     if(arr[k]>arr[k+1])
-                   {
-                       var  temp=arr[k];
+                     {
+                        var  temp=arr[k];
                          arr[k]=arr[k+1];
                          arr[k+1]=temp;
-                    }
-                }
-           }
-         console.log("The sorted array is"+[arr]);
-        }
-        else
+                     }
+                  }
+            } 
+             console.log("The sorted array is "+[arr]);
+         }
+         else
         {
-         console.log("please enter numbers");
-        }
+             console.log("please enter numbers");
+         }
     },
-
+ /*bubbleword function takes the array values and sorted the words by comparing with index values*/
     bubbleword : function(size)
-    {   var prompt=require('prompt-sync')();
+    {   
+         /*returns an instance of prompt to read input from users*/
+        var prompt=require('prompt-sync')();
         var arr=new Array(size);
+           /*Initilizing the loop to store the array values*/
         for(var i=0;i<size;i++)
         {
             arr[i]=prompt("enter the strings");
         }
+         /* variables that defines special characters using regex values*/
         var char=/[a-zA-Z]/g;
         var num=/[0-9]/g;
         var symbol=/[!@#$%^&*()<>+-/"'?]/g;
         var count=0;
+           /*intializing the loop to take only string values*/
         for(var i=0;i<arr.length;i++)
         {
             if(arr[i].search(num)== -1 && arr[i].search(symbol)== -1)
@@ -262,6 +306,8 @@ module.exports={
         if(count==arr.length)
         {
             console.log(arr);
+             /* compare each and every value and if each index value is greater than the 
+                given value it will swap*/
            for(var j=0;j<arr.length-1;j++)
            {
                for(var k=0;k<arr.length-1-j;k++)
@@ -281,11 +327,13 @@ module.exports={
          console.log("please enter string values");
         }
     },
-
+ /*insertionword function takes the array values and sorted it by comparing with key elements*/ 
     insertionword : function(size)
     {
+        /*returns an instance of prompt to read input from users*/
         var prompt=require('prompt-sync')();
         var arr=new Array(size);
+        /*Initilizing the loop to store the array values*/
         for(var i=0;i<size;i++)
         {
             arr[i]=prompt("enter the strings");
@@ -304,6 +352,9 @@ module.exports={
         if(count==arr.length)
         {
             console.log(arr);
+            /* Insertion sort is done by taking the starting index as key element and compare 
+               with remaining values if the value is greater than key element ,key value is moved
+               before the keyelement*/
             for(var j=1;j<arr.length;j++)
             {
               var key=arr[j];
@@ -323,11 +374,14 @@ module.exports={
            console.log("please enter string values");
         }
     },
-
+/*insertionword function takes the array values and sorted it by comparing with key elements*/ 
     insertion : function(size)
     {
+
+        /*returns an instance of prompt to read input from users*/
         var prompt=require('prompt-sync')();
         var arr=new Array(size);
+         /*Initilizing the loop to store the array values*/
         for(var i=0;i<size;i++)
         {
             arr[i]=prompt("enter the numbers: ");
@@ -336,6 +390,7 @@ module.exports={
         var num=/[0-9]/g;
         var symbol=/[!@#$%^&*()<>+-/"'?]/g;
         var count=0;
+     
         for(var i=0;i<arr.length;i++)
         {
             if(arr[i].search(char)== -1 && arr[i].search(symbol)== -1)
@@ -345,6 +400,9 @@ module.exports={
         }
         if(count==arr.length)
        {
+              /* Insertion sort is done by taking the starting index as key element and compare 
+               with remaining values if the value is greater than key element ,key value is moved
+               before the keyelement*/
             for(var j=1;j<arr.length;j++)
             {
               var key=arr[j];
@@ -364,7 +422,7 @@ module.exports={
            console.log("please enter numerical values");
         }
     },
-
+/* taking low and high values and finding the number*/
     numgame : function(low,high)
     {
         var prompt=require('prompt-sync')();
@@ -374,14 +432,17 @@ module.exports={
         console.log("if the given number is greater than "+mid+" press 2");
         console.log("if number is equal press zero: ")
         var temp= prompt("enter the number: ");
+        /* pressing temp value equal to 0 then it is your number*/
         if(temp == 0)
         {
             console.log("your number is: "+mid);
         }
+        /*if temp value is 1 then number is less than mid and repeat the numgame function through recursion*/
         else if(temp == 1)
         {
             this.numgame(low,mid);
         }
+        /*if temp value is 2 then number is greater than mid*/
         else if(temp == 2)
         {
             this.numgame(mid,high);
@@ -390,18 +451,16 @@ module.exports={
             console.log("Invalid option");
         }
     },
-
+/*taking input as year,month and date displaying the day as output*/
      calender : function(y,m,d)
     {
         var m0,y0,d0,x;
         y0=y-Math.floor(14-m)/12;
-        console.log(y0);
         x=y0+Math.floor(y0/4)-Math.floor(y0/100)+Math.floor(y0/400);
-        console.log(x);
         m0=m+12*(Math.floor(14-m)/12)-2;
-        console.log(m0);
-        d0=(d+ x +Math.floor (31 * m0) / 12) % 7;
-        
+        d0=(d+ x +Math.floor( (31 * m0) / 12)) % 7;
+
+        /* by taking d0 values switch cases will takes values*/
         switch(parseInt(d0))
         {
             case 0: console.log("sunday");
@@ -423,21 +482,21 @@ module.exports={
          }  
 
     },
-
+/* convert_to_f function takes celsius value and convert it into fahrenheit*/
   convert_to_f : function(celsius,value)
   {
       if(celsius=="C")
       c=(value*Math.floor(9/5))+32;
       console.log("The given "+value+" degree centigrade is converted into "+c+" degree fahrenheit");
   }, 
-
+/* convert_to_c function takes Fahrenheit value value and convert it into celsius*/
   convert_to_c : function(Fahrenheit,value)
   {
       if(Fahrenheit=="F")
       f=(value-32)*(5/9);
       console.log("The given "+value+" degree fahrenheit is converted into "+f+" degree centigrade");
   },
-
+/*interest for monthly payment is printed by taking amount,rate of interest and no of years*/ 
   payment : function(Principal,Year,Rate)
   {
     var n=12*Year;
@@ -445,12 +504,12 @@ module.exports={
     pay = (Principal*r)/1-Math.pow(1+r,-n);
     console.log("Monthly payment is :"+pay);
   },
-
+/* the squareroot values will be printed for positive integers*/
   sqrt : function(c)
   {
          if(c<0)
          {
-             console.log("The given value is non negative");
+             console.log("The given value is negative integer");
          }
          var t=c;
          var epsilon=1e-15;
@@ -463,56 +522,52 @@ module.exports={
 
   word : function(searchword)
   {
+      /* used to read the file from fs module*/
       var fs=require('fs');
+      /* used to encode the message and read the file*/
       var text=fs.readFileSync('message.txt','utf8');
+      /* splitting the text by spaces and stored in array*/
       var arr=text.split(" ");
+      /* sort the given array*/
       arr=arr.sort();
       console.log(arr);
-      var a=0;
       var first=0;
       var last=arr.length-1;
       while(first<=last)
       {
 
-         var  mid=(Math.floor(first+last)/2);
-         console.log(mid);
+         var  mid=Math.floor((first+last)/2);
           if(searchword==arr[mid])
           {
-              a=1;
-              console.log(a);
-              break;
+              console.log(" The word is given in the file at index: "+mid);
+              process.exit();
           }       
-            else{
-                if(searchword > arr[mid])
-                {
+          else if(searchword > arr[mid])
+          {
                  first=mid+1;
                  console.log(first);
-                }
-                else 
-                {
+          }
+          else if(searchword < arr[mid])
+          {
                 last=mid-1;
                 console.log(last);
-                }
-            }
-        
-       }
-          if(a==="1")
-          {
-              console.log("The search element is found at index "+mid);
           }
-          else{
-              console.log("the search element is not found");
-      
-              }
+          else
+          {
+              console.log("The given word is not in the file");
+              process.exit();
+          }
+        
+      }
                      
-      
-  },
-
+    },
+/* to count the minimum number of notes through vending machine*/
   vendmachine : function(amount)
   {
        var thousand=0, fivehundred=0, hundred=0,fifty=0,twenty=0,ten=0,five=0,two=0,one=0;
        var count=0;
-
+/* if the amount is greates than or equal to money then count value increased and amount 
+   amount value is reduced to money*/
        while(amount>=1000)
        {
          thousand=thousand+1;
@@ -570,18 +625,23 @@ module.exports={
 
       console.log("the minimum no of notes are: "+count);
     },
-
+/* Taking decimal value as input and gives binary value*/
     getbinary : function(decimal)
     {
+        /*initalizing the empty arrays to store the values an initialized index to zero*/
         var binaryvalue=[];
         var reverse=[];
         var index=0;
+        /* Entering in the loop when the decimal value is greaterthan zero*/
         while(decimal>0)
         {
+            /*Taking the remainder values and storing in array in evert iteration*/
             reverse[index]=decimal%2;
+            /*Decimal value is divided by 2 and storing in decimal*/
             decimal=Math.floor(decimal/2);
             index++;
         }
+        /* storing the array values of decimal in reverse order*/
         for(var j=0;j<reverse.length;j++)
         {
             binaryvalue[j]=reverse[reverse.length-1-j];
@@ -591,21 +651,27 @@ module.exports={
 
   mergesort : function(arr)
   {
+      /* arrays are defined to store the splitted value of single array*/ 
      var arr1=[];
      var arr2=[];
+     /* Taking the mid value of an array to split into half*/
      var mid=Math.floor(arr.length/2);
+     /* if the array is having one value then it will return array*/
      if(arr.length==1)
      {
          return arr;
      }
+     /* Storing the first half values in the arr1*/
      for(var i=0;i<mid;i++)
      {
          arr1.push(arr[i]);
      }
+     /* storing the reamaining half values in arr2*/
      for(var j=mid;j<arr.length;j++)
      {
          arr2.push(arr[j]);
      }
+     /* splitting the above process through recursion*/ 
      return this.merge(this.mergesort(arr1),this.mergesort(arr2));
     },
 
@@ -649,6 +715,7 @@ module.exports={
    
      toBinary : function(dec)
      {
+         /*decimal value is converted into binary and it is stored in an array*/
          var a=0;
          var res=" ";
          while(dec>0){
@@ -660,24 +727,14 @@ module.exports={
          console.log("Binary value of the given decimal is: "+resarray);
          return resarray;
      },
-     Binary : function (bin)
-     {
-         var str=""+bin;
-         var arr=(str.split('')).reverse();
-         var dec=0;
-         for(var i=0;i<arr.length;i++)
-         {
-             dec=dec+parseInt(arr[i]*(Math.pow(2,i)));
-         }
-        /* console.log("decimal value of the given number is"+dec);*/
-         return dec;
-     },
+     
      nibble : function(bin)
      {
+         /*the binary values is splitted into two strings and second string value is added to first
+           and new binary number is formed*/ 
          var str = ""+bin;
          var mid=0,str1="",res=[];
          var flag=false;
-         var final="";
          while(flag==false)
          if(str.length==9)
          {
@@ -697,9 +754,23 @@ module.exports={
              }
             }
        },
+       Binary : function (bin)
+     {
+         /* the above resultant binary value is reversed and again it is converted into decimal value*/
+         var str=""+bin;
+         var arr=(str.split('')).reverse();
+         var dec=0;
+         for(var i=0;i<arr.length;i++)
+         {
+             dec=dec+parseInt(arr[i]*(Math.pow(2,i)));
+         }
+        /* console.log("decimal value of the given number is"+dec);*/
+         return dec;
+     },
 
        checkpow: function (n)
        {
+           /* checking wheather the formed number is the power of 2 or not*/
            var pow=0;
            while(n>1){
                if(n%2==0)
