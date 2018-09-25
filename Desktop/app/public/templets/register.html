@@ -1,0 +1,40 @@
+<!-- The <div> element is often used as a container for a class registration. -->
+<div class="registration">
+         <!-- the form-data is created with the name registration form. -->
+          <form>
+            <!-- Declaring the heading as registration form -->
+            <h2 align="center">Registration Form</h2>
+          <!-- The HTML <label> element represents a caption for Firstname and declaring input from user -->
+          <label>Firstname</label>
+          <input type="text" placeholder="Enter your first name" ng-model="user.firstname"/>
+           <p class="sample"></p>
+          <!-- The HTML <label> element represents a caption for Lastname and declaring input from user -->
+          <label>Lastname</label>
+          <input type="text" placeholder="Enter your last name " ng-model="user.lastname"/>
+          <p class="sample"></p> 
+          <!-- The HTML <label> element represents a caption for Email and declaring input from user -->
+          <label>email-id</label>
+          <input type="text" placeholder="Enter your email-id " ng-model="user.email"/>
+          <p class="sample">
+          </p>
+          <!-- The HTML <label> element represents a caption for Password and declaring input from user -->
+          <label>Password</label>
+          <input type="password" placeholder="Enter the password" ng-model="user.password" />
+          <p class="sample">
+          </p>
+          <!-- The HTML <label> element represents a caption for confirm password and declaring input from user -->
+          <!-- <label>Confirm password</label>
+          <input type="confirm password" placeholder="Re-Enter the password"/>
+          <p class="sample"> -->
+          <!-- </p> -->
+          <!-- The HTML <label> element represents a caption for Mobilenumber and declaring input from user -->
+          <label>MobileNumber</label>
+          <input type="number" placeholder="Enter your mobile number" ng-model="user.mobile" />
+          <p class="sample">
+          </p>
+          <div class="register_button" ng-click="register()">
+            <!-- Giving a link to register page -->
+            <span><a href="">Submit</a></span>
+          </div>
+        </form>
+      </div>
